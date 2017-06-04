@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <style type="text/css">
+        .jumbo-step {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron step0">
+            <h1>Hi1</h1>
+            <p class="lead">Main text1</p>
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="hidden" class="form-control question" value="123">
+                </div>
+                <button class="btn btn-lg btn-success" data-step-to-show=".step1" data-answer="123">Ok</button>
+            </form>
+        </div>
+        <div class="jumbotron jumbo-step step1">
+            <h1>Hi2</h1>
+            <p class="lead">Main text2</p>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label>Answer</label>
+                    <input type="text" class="form-control question">
+                </div>
+                <button type="button" class="btn btn-primary" data-step-to-show=".step2" data-answer="q3">Ok</button>
+            </form>
+        </div>
+        <div class="jumbotron jumbo-step step2">
+            <h1>Hi3</h1>
+            <p class="lead">Main text3</p>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label>Answer</label>
+                    <input type="text" class="form-control question">
+                </div>
+                <button type="button" class="btn btn-primary" data-step-to-show=".step3">Ok</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(function() {
+            var animationTime = 500;
+	        $(".btn").click(function() {
+                var me = $(this);
+                var prnt = me.parent();
+                var jumbo = me.parents(".jumbotron");
+                var question = jumbo.find(".question");
+
+                if(me.data("answer") == question.val()) {
+                    if(prnt.hasClass("has-error")) {
+                        prnt.removeClass("has-rror").addClass("has-success");
+                    }
+
+                    $(jumbo).slideUp(animationTime);
+                    $(me.data("step-to-show")).slideDown(animationTime);
+                }
+                else {
+                    if(!prnt.hasClass("has-error"))
+                    prnt.addClass("has-error");
+
+                    question.val("");
+                }
+
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>
